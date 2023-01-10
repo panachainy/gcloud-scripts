@@ -3,28 +3,14 @@
 PROJECT=default-project
 
 # check if --run is provided as an argument
-if [ "$1" == "--run" ]; then
+if [ "$1" == "run" ]; then
     RUN_MODE=true
+    PROJECT="$2"
     shift
 else
     RUN_MODE=false
+    PROJECT="$1"
 fi
-
-# check for project argument
-while [[ $# -gt 0 ]]
-do
-    key="$1"
-    case $key in
-        --project)
-        PROJECT="$2"
-        shift # past argument
-        shift # past value
-        ;;
-        *)    # unknown option
-        shift # past argument
-        ;;
-    esac
-done
 
 # Read the .env file
 while IFS='=' read -r key value; do
